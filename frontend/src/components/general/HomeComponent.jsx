@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 class HomeComponent extends Component {
     render() {
@@ -17,4 +17,4 @@ class HomeComponent extends Component {
     }
 }
 
-export default HomeComponent
+export default HomeComponent;
