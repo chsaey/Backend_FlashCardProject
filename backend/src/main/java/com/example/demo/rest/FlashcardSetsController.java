@@ -36,8 +36,8 @@ public class FlashcardSetsController {
         //this is to force a save of new item .... instead of update
         theFlashcardSet.setId(0);
 
-        //This will call the employeeDqoImpl.save method to save a new flashcardSet
-        //through the employeeDAO interface SPRING
+        //This will call the flashcardsetsDqoImpl.save method to save a new flashcardSet
+        //through the flashcardsetsDAO interface SPRING
         myDAO.save(theFlashcardSet);
         return theFlashcardSet;
     }
