@@ -17,7 +17,7 @@ public class FlashcardSetsController {
     //Constructor Injection: this is telling the spring framework to wire up your
     //dependencies for the flashcardsetsDAO.
     @Autowired
-    public FlashcardSetsController(@Qualifier("employeeIMPL") MyDAO myDAO) {
+    public FlashcardSetsController(@Qualifier("flashcardSetsIMPL") MyDAO myDAO) {
         this.myDAO = myDAO;
     }
 

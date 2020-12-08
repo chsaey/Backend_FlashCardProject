@@ -5,6 +5,6 @@ import java.util.List;
 public interface MyDAO {
     List<Object> fetchAll();
     Object fetchById(int theId);
-    void save(Object theEmployee);
+    void save(Object object);
     void deleteById(int theId);
 }
