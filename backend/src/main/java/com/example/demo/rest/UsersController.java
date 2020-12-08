@@ -17,7 +17,7 @@ public class UsersController {
     //Constructor Injection: this is telling the spring framework to wire up your
     //dependencies for the userDAO.
     @Autowired
-    public UsersController(@Qualifier("employeeIMPL") MyDAO myDAO) {
+    public UsersController(@Qualifier("usersIMPL") MyDAO myDAO) {
         this.myDAO = myDAO;
     }
 

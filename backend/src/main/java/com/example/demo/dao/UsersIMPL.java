@@ -4,11 +4,13 @@ import com.example.demo.entity.Users;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
+@Repository
 public class UsersIMPL implements MyDAO{
 
     //Define field for entity manager
@@ -26,7 +28,7 @@ public class UsersIMPL implements MyDAO{
     @Transactional //Defines the scope of a single database transaction.
     public List<Object> fetchAll() {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<Object> myQuery = currentSession.createQuery("from Cards");
+        Query<Object> myQuery = currentSession.createQuery("from Users");
         return myQuery.getResultList();
     }
 
