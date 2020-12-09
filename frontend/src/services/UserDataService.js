@@ -7,7 +7,7 @@ class UserDataService {
     }
 
     deleteUser(id) {
-        return axios.delete('http://localhost:8080/deleteUser/${id}')
+        return axios.delete(`http://localhost:8080/deleteUser/${id}`)
     }
 
     updateUser(user) {
