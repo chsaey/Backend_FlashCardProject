@@ -34,7 +34,6 @@ class UsersControllerTest {
     @Mock
     MyDAO myDAO;
 
-
     @Test
     void findAll() {
         Users user = new Users( "chsaey", "pwd"," Charles","Saeyang");
@@ -44,7 +43,14 @@ class UsersControllerTest {
         when(userController.findAll()).thenReturn(users);
         List<Object> result = userController.findAll();
         assertThat(result.size() == 3);
-        assertThat(result.get(0).getClass().getSimpleName().equals(users.get(0).getClass().getSimpleName()));
+
+        Users expectCharles = ((Users) result.get(0));
+        Users expectDan = (Users) result.get(1);
+        Users expectHiep = (Users) result.get(2);
+
+        assertThat(expectCharles.getFirstName().equals(user.getFirstName()));
+        assertThat(expectDan.getFirstName().equals(user2.getFirstName()));
+        assertThat(expectHiep.getFirstName().equals(user3.getFirstName()));
 
     }
 
