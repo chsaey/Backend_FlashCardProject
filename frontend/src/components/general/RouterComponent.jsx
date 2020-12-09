@@ -15,7 +15,7 @@ class RouterComponent extends Component {
                         <Switch>
                             <Route exact path="/"><HomeComponent /></Route>
                             <Route path="/SignIn"><SignInComponent /></Route>
-                            <Route path="/CreateNewUser"><CreateNewUserComponent /></Route>
+                            <Route path="/CreateNewUser/:id" component={CreateNewUserComponent} />
                         </Switch>
                     <FooterComponent />
                 </Router>

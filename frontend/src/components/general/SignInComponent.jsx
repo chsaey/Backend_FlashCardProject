@@ -4,7 +4,7 @@ class SignInComponent extends Component {
     render() {
         return (
             <div className="container">
-                <p>TEST</p>
+                <p>Test</p>
             </div>
         )
     }
