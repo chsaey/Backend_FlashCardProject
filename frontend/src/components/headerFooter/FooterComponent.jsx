@@ -9,3 +9,5 @@ class FooterComponent extends Component {
         )
     }
 }
+
+export default FooterComponent

@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS `flashcard`;
 DROP TABLE IF EXISTS `flashcardset`;
 DROP TABLE IF EXISTS `users`;
 
+
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(45) NOT NULL,
@@ -13,6 +14,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+
 CREATE TABLE `flashcardset` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -20,6 +22,8 @@ CREATE TABLE `flashcardset` (
   PRIMARY KEY (id),
   FOREIGN KEY (userID) REFERENCES users(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
 
 CREATE TABLE `flashcard` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
