@@ -62,4 +62,14 @@ public class Flashcards {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
+
+    @Override
+    public String toString() {
+        return "Flashcards{" +
+                "id=" + id +
+                ", flashcardSets=" + flashcardSets +
+                ", question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                '}';
+    }
 }
