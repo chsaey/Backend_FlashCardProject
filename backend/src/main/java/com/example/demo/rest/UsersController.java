@@ -15,7 +15,7 @@ public class UsersController {
     private final MyDAO myDAO;
 
     //Constructor Injection: this is telling the spring framework to wire up your
-    //dependencies for the userDAO.
+    //dependencies for the usersDAO.
     @Autowired
     public UsersController(@Qualifier("usersIMPL") MyDAO myDAO) {
         this.myDAO = myDAO;
@@ -36,8 +36,8 @@ public class UsersController {
         //this is to force a save of new item .... instead of update
         theUser.setId(0);
 
-        //This will call the employeeDqoImpl.save method to save a new employee
-        //through the employeeDAO interface SPRING
+        //This will call the usersDqoImpl.save method to save a new employee
+        //through the usersDAO interface SPRING
         myDAO.save(theUser);
         return theUser;
     }
@@ -55,7 +55,7 @@ public class UsersController {
     //http://localhost:8080/deleteUser/1
     @DeleteMapping("/deleteUser/{userId}")
     public String deleteUser(@PathVariable int userId) {
-        //Creating a tempEmployee to check to see if an employee exists
+        //Creating a tempUser to check to see if an employee exists
         Users tempUser = (Users) myDAO.fetchById(userId);
 
         //This will throw an exception if the employee is null

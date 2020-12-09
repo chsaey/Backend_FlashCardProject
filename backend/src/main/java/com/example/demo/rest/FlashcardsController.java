@@ -16,7 +16,8 @@ public class FlashcardsController {
     private final MyDAO myDAO;
 
     //Constructor Injection: this is telling the spring framework to wire up your
-    //dependencies for the flashcardDAO.
+    //dependencies for the flashcardsDAO.
+
     @Autowired
     public FlashcardsController(@Qualifier("flashcardsIMPL") MyDAO myDAO) {
         this.myDAO = myDAO;
@@ -38,7 +39,7 @@ public class FlashcardsController {
         theCard.setId(0);
 
         //This will call the flashcardsDqoImpl.save method to save a new employee
-        //through the employeeDAO interface SPRING
+        //through the flashcardsDAO interface SPRING
         myDAO.save(theCard);
         return theCard;
     }
