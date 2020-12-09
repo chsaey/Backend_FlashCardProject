@@ -1,6 +1,7 @@
 package com.example.demo.rest;
 
 import com.example.demo.dao.MyDAO;
+import com.example.demo.dao.UsersIMPL;
 import com.example.demo.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +28,19 @@ public class UsersController {
     public List<Object> findAll() {
         return myDAO.fetchAll();
     }
+
+    //Get a user by their ID
+    @GetMapping("/findUserById/{Id}")
+    public Object findById(@PathVariable int Id){
+        return myDAO.fetchById(Id);
+    }
+
+    //Get a user by their ID
+    @GetMapping("/findUserByLogin/{username}/{password}")
+    public Object findByLogin(@PathVariable String username, @PathVariable String password){
+        return myDAO.fetchByLogin(username,password);
+    }
+
 
     //This is a POST request to add a new user.
     //http://localhost:8080/addUser
