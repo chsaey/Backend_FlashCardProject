@@ -40,6 +40,11 @@ public class FlashcardsIMPL implements  MyDAO{
     }
 
     @Override
+    public Object fetchByLogin(String userName, String password) {
+        return null;
+    }
+
+    @Override
     @Transactional //Defines the scope of a single database transaction.
     public void save(Object theCard) {
         Session currentSession = entityManager.unwrap(Session.class);
