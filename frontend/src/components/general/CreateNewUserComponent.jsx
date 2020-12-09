@@ -32,12 +32,14 @@ class CreateNewUserComponent extends Component {
     render() {
         let {id, firstName, lastName, username, password} = this.state
         return (
-            <div className="container">
-                <br />
-                <br />
-                <div className="jumbotron" style={{backgroundColor:"Black"}}>
-                    <h2 style={{color:"Green"}}>Add your info...</h2>
-                    <br />
+            <div className="base-container">
+                <br/>
+                <div className="header">Register</div>
+                <div className="content">
+                <div className="image">
+                    <img src="https://images-na.ssl-images-amazon.com/images/I/61CfipGxS-L._AC_SL1001_.jpg" alt="new"/>
+                </div>
+                    
                     <Formik
                         initialValues={{id, firstName, lastName, username, password}}
                         onSubmit={this.onSubmit}
@@ -45,27 +47,30 @@ class CreateNewUserComponent extends Component {
                     >
                         {
                             (props) => (
-                                <Form>
-                                    <fieldset className="form-group">
-                                        <label style={{color:"white"}}>ID:</label>
+                                <Form className="form">
+                                    {/* <fieldset className="form-group">
+                                        <label >ID:</label>
                                         <Field className="form-control" type="text" name="id" disabled />
+                                    </fieldset> */}
+                                    <fieldset className="form-group">
+                                        <label>First Name</label>
+                                        <Field className="form-control" type="text" name="firstName" placeholder="firstname" />
+                                    </fieldset >
+                                    <fieldset className="form-group">
+                                        <label>Last Name</label>
+                                        <Field className="form-control" type="text" name="lastName" placeholder="lastname" />
                                     </fieldset>
-                                    <fieldset>
-                                        <label style={{color:"white"}}>First Name:</label>
-                                        <Field className="form-control" type="text" name="firstName" />
+                                    <fieldset className="form-group">
+                                        <label>Username</label>
+                                        <Field className="form-control" type="text" name="username" placeholder="username" />
                                     </fieldset>
-                                    <fieldset>
-                                        <label style={{color:"white"}}>Last Name:</label>
-                                        <Field className="form-control" type="text" name="lastName" />
+                                    <fieldset className="form-group">
+                                        <label>Password</label>
+                                        <Field className="form-control" type="text" name="password" placeholder="password" />
                                     </fieldset>
-                                    <fieldset>
-                                        <label style={{color:"white"}}>Username:</label>
-                                        <Field className="form-control" type="text" name="username" />
-                                    </fieldset>
-                                    <fieldset>
-                                        <label style={{color:"white"}}>Password:</label>
-                                        <Field className="form-control" type="text" name="password" />
-                                    </fieldset>
+                                    <div className="footer1">
+                                        <button className="btn" type="submit">Register</button>
+                                    </div>
                                 </Form>
                             )
                         }
