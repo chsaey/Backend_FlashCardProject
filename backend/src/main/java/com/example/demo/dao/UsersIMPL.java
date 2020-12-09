@@ -40,6 +40,16 @@ public class UsersIMPL implements MyDAO{
     }
 
     @Override
+    @Transactional //fetch by login.
+    public Object fetchByLogin(String userName,String password) {
+        Session currentSession = entityManager.unwrap(Session.class);
+        Query query = currentSession.createQuery("from Users where :name like user_name and :pwd like password");
+        query.setParameter("name",userName);
+        query.setParameter("pwd",password);
+        return query.getResultList();
+    }
+
+    @Override
     @Transactional //Defines the scope of a single database transaction.
     public void save(Object theUser) {
         Session currentSession = entityManager.unwrap(Session.class);

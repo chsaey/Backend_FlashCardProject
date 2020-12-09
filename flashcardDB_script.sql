@@ -62,12 +62,3 @@ VALUES ('What is OOP?','Object Oriented programming',1),
 
 ('Is mayonnaise and instrument?','Yes',5),
 ('What song is this','Sandstorm - Darude',5);
-
-
-
-
-
-
-
-
-
