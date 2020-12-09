@@ -8,13 +8,12 @@ class HeaderComponent extends Component {
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                     <ul className="navbar-nav">
                         <li><Link className="nav-link" to="/">Home</Link></li>
-                        <li><Link className="nav-link" to="/EmployeeRegistry">Employee Registry</Link></li>
-                        <li><Link className="nav-link" to="/EverettRegistry">Everett Registry</Link></li>
-                        <li><Link className="nav-link" to="/LindsayRegistry">Lindsay Registry</Link></li>
+                        <li><Link className="nav-link" to="/SignIn">Sign In</Link></li>
+                        <li><Link className="nav-link" to="/CreateNewUser">Create New User</Link></li>
                     </ul>
                 </nav>
             </header>
         )
     }
 }
-export default HeaderComponent; 
+export default HeaderComponent
