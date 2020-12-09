@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import HeaderComponent from '../headerFooter/HeaderComponent'
-import FooterComponent from '../headerFooter/FooterComponent'
-import HomeComponent from './HomeComponent'
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import HeaderComponent from '../headerFooter/HeaderComponent';
+import FooterComponent from '../headerFooter/FooterComponent';
+import HomeComponent from './HomeComponent';
+import SignInComponent from './SignInComponent';
+import CreateNewUserComponent from './CreateNewUserComponent';
 
 class RouterComponent extends Component {
     render() {
@@ -12,9 +14,14 @@ class RouterComponent extends Component {
                     <HeaderComponent />
                         <Switch>
                             <Route exact path="/"><HomeComponent /></Route>
+                            <Route path="/SignIn"><SignInComponent /></Route>
+                            <Route path="/CreateNewUser"><CreateNewUserComponent /></Route>
                         </Switch>
+                    <FooterComponent />
                 </Router>
             </div>
         )
     }
 }
+
+export default RouterComponent
