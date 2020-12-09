@@ -47,23 +47,23 @@ class CreateNewUserComponent extends Component {
                             (props) => (
                                 <Form>
                                     <fieldset className="form-group">
-                                        <label>ID:</label>
+                                        <label style={{color:"white"}}>ID:</label>
                                         <Field className="form-control" type="text" name="id" disabled />
                                     </fieldset>
                                     <fieldset>
-                                        <label>First Name:</label>
+                                        <label style={{color:"white"}}>First Name:</label>
                                         <Field className="form-control" type="text" name="firstName" />
                                     </fieldset>
                                     <fieldset>
-                                        <label>Last Name:</label>
+                                        <label style={{color:"white"}}>Last Name:</label>
                                         <Field className="form-control" type="text" name="lastName" />
                                     </fieldset>
                                     <fieldset>
-                                        <label>Username:</label>
+                                        <label style={{color:"white"}}>Username:</label>
                                         <Field className="form-control" type="text" name="username" />
                                     </fieldset>
                                     <fieldset>
-                                        <label>Password:</label>
+                                        <label style={{color:"white"}}>Password:</label>
                                         <Field className="form-control" type="text" name="password" />
                                     </fieldset>
                                 </Form>
