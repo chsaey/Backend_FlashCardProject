@@ -25,7 +25,7 @@ public class FlashcardSetsController {
     }
 
     //This is a GET request that will read a list of all the flashcardSets.
-    //http://localhost:8080/FlashcardSets
+    //http://localhost:8080/retrieveAllFlashcardSets
     @GetMapping("/retrieveAllFlashcardSets")
     public List<Object> findAll() {
         return myDAO.fetchAll();

@@ -59,4 +59,13 @@ public class FlashcardSets {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "FlashcardSets{" +
+                "id=" + id +
+                ", users=" + users +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
