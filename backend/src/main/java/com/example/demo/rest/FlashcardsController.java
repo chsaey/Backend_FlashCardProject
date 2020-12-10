@@ -65,7 +65,7 @@ public class FlashcardsController {
 
         //This will throw an exception if the employee is null
         if (tempFlashcards == null) {
-            throw new RuntimeException("Employee is not found : " + flashcardId);
+            throw new RuntimeException("Flashcard is not found : " + flashcardId);
         }
 
         //This will execute the deleteByID.
