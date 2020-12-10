@@ -5,8 +5,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Entity //This will let Java know that this is an entity that we are going to map to a database table.
 @Table(name = "flashcardset") //This is for the actual name of the database table we are mapping to the class.
@@ -23,6 +22,7 @@ public class FlashcardSets {
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "userID", nullable = false)
+    @JsonIgnore
     private Users users;
 
 /*    @OneToMany(mappedBy="FlashcardSets",cascade= CascadeType.ALL,orphanRemoval = true)

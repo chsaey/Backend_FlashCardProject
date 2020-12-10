@@ -1,7 +1,9 @@
 package com.example.demo.rest;
 
 import com.example.demo.dao.MyDAO;
+import com.example.demo.entity.FlashcardSets;
 import com.example.demo.entity.Flashcards;
+import com.example.demo.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 //This is to allow calls from React... NOT IMPORTANT RIGHT NOW
-@CrossOrigin(origins = { "http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class FlashcardsController {
 
@@ -36,6 +38,13 @@ public class FlashcardsController {
     public Flashcards addFlashcard(@RequestBody Flashcards theCard) {
         //also just in case they pass an id in JSON .... set id to o
         //this is to force a save of new item .... instead of update
+
+        //get user to put in set
+        Users user = new Users();
+
+        //get set to put in card
+
+
         theCard.setId(0);
 
         //This will call the flashcardsDqoImpl.save method to save a new employee
@@ -61,7 +70,7 @@ public class FlashcardsController {
         Flashcards tempFlashcards = (Flashcards) myDAO.fetchById(flashcardId);
 
         //This will throw an exception if the employee is null
-        if(tempFlashcards == null) {
+        if (tempFlashcards == null) {
             throw new RuntimeException("Employee is not found : " + flashcardId);
         }
 

@@ -38,9 +38,6 @@ public class FlashcardSetsController {
         //also just in case they pass an id in JSON .... set id to o
         //this is to force a save of new item .... instead of update
 
-        //needs to grab the entity from the DB. Workaround for now.
-        FlashcardSets tempFlashcardSet = (FlashcardSets) myDAO.fetchById(theFlashcardSet.getUsers().getId());
-
         theFlashcardSet.setId(0);
 
         //This will call the flashcardsetsDqoImpl.save method to save a new flashcardSet
@@ -53,7 +50,6 @@ public class FlashcardSetsController {
     //http://localhost:8080/updateFlashcardSet
     @PutMapping("/updateFlashcardSet")
     public FlashcardSets updateFlashcardSet(@RequestBody FlashcardSets updateFlashcardSet) {
-
 
         //No theEmployee.setId(0); this will execute an update instead of a create
         myDAO.save(updateFlashcardSet);
