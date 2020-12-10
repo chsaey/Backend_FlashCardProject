@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class CardDataService {
+class FlashcardDataService {
 
     retrieveAllCards() {
         return axios.get(`http://localhost:8080/retrieveAllFlashcards`)
@@ -19,4 +19,4 @@ class CardDataService {
     }
 }
 
-export default new CardDataService();
+export default new FlashcardDataService();
