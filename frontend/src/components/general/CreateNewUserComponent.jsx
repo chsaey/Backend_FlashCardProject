@@ -74,7 +74,7 @@ class CreateNewUserComponent extends Component {
                                 </Form>
                             )
                         }
-                        </Formik>
+                    </Formik>
                 </div>
             </div>
         )
