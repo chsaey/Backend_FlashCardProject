@@ -67,13 +67,13 @@ class FlashcardSetComponent extends Component {
                         <tbody>
                             {
                                 this.state.flashcardSets.map(
-                                    cards =>
+                                    flashcardSets =>
                                         <tr style={{ textAlign: "center" }} key={flashcardSets.id}>
                                             <td>{flashcardSets.id}</td>
                                             <td>{flashcardSets.name}</td>
-                                            <td>{cards.userID}</td>
-                                            <td><button className="btn btn-warning" onClick={() => this.deleteFlashcardSetClicked(cards.id, cards.name)}>Delete</button></td>
-                                            <td><button className="btn btn-success" onClick={() => this.updateFlashcardSetClicked(cards.id)}>Update</button></td>
+                                            <td>{flashcardSets.userID}</td>
+                                            <td><button className="btn btn-warning" onClick={() => this.deleteFlashcardSetClicked(flashcardSets.id, flashcardSets.name)}>Delete</button></td>
+                                            <td><button className="btn btn-success" onClick={() => this.updateFlashcardSetClicked(flashcardSets.id)}>Update</button></td>
                                         </tr>
                                 )
                             }
@@ -88,3 +88,5 @@ class FlashcardSetComponent extends Component {
         )
     }
 }
+
+export default FlashcardSetComponent;

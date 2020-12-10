@@ -4,6 +4,8 @@ import com.example.demo.dao.FlashcardSetsIMPL;
 import com.example.demo.dao.FlashcardsIMPL;
 import com.example.demo.dao.MyDAO;
 import com.example.demo.entity.FlashcardSets;
+import com.example.demo.entity.Flashcards;
+import com.example.demo.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 //This is to allow calls from React... NOT IMPORTANT RIGHT NOW
-@CrossOrigin(origins = { "http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class FlashcardSetsController {
     private final MyDAO myDAO;
 
-
-    //Constructor Injection: this is telling the spring framework to wire up your
-    //dependencies for the flashcardsetsDAO.
     @Autowired
     public FlashcardSetsController(@Qualifier("flashcardSetsIMPL") MyDAO myDAO) {
         this.myDAO = myDAO;
@@ -34,26 +33,21 @@ public class FlashcardSetsController {
     //This is a POST request to add a new flashcardSet.
     //http://localhost:8080/addFlashcardSet
     @PostMapping("/addFlashcardSet")
-    public FlashcardSets addFlashcardSet(@RequestBody FlashcardSets theFlashcardSet) {
-        //also just in case they pass an id in JSON .... set id to o
-        //this is to force a save of new item .... instead of update
+    public FlashcardSets addFlashcardSet(@RequestBody FlashcardSets flashcardSets) {
 
-        theFlashcardSet.setId(0);
-
-        //This will call the flashcardsetsDqoImpl.save method to save a new flashcardSet
-        //through the flashcardsetsDAO interface SPRING
-        myDAO.save(theFlashcardSet);
-        return theFlashcardSet;
+        myDAO.save(flashcardSets);
+        return flashcardSets;
     }
 
     //This is a PUT request to update an existing flashcardSet.
     //http://localhost:8080/updateFlashcardSet
     @PutMapping("/updateFlashcardSet")
     public FlashcardSets updateFlashcardSet(@RequestBody FlashcardSets updateFlashcardSet) {
-
+        FlashcardSets result = (FlashcardSets) myDAO.fetchById(updateFlashcardSet.getId());
+        result.setName(updateFlashcardSet.getName());
         //No theEmployee.setId(0); this will execute an update instead of a create
-        myDAO.save(updateFlashcardSet);
-        return updateFlashcardSet;
+        myDAO.save(result);
+        return result;
     }
 
     //This is a DELETE request to delete an existing employee.
@@ -64,7 +58,7 @@ public class FlashcardSetsController {
         FlashcardSets tempFlashcardSet = (FlashcardSets) myDAO.fetchById(flashcardSetId);
 
         //This will throw an exception if the flashcardSet is null
-        if(tempFlashcardSet == null) {
+        if (tempFlashcardSet == null) {
             throw new RuntimeException("flashcardSet is not found : " + flashcardSetId);
         }
 

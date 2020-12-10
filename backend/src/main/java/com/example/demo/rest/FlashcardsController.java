@@ -1,24 +1,16 @@
 package com.example.demo.rest;
-
 import com.example.demo.dao.MyDAO;
-import com.example.demo.entity.FlashcardSets;
 import com.example.demo.entity.Flashcards;
-import com.example.demo.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 //This is to allow calls from React... NOT IMPORTANT RIGHT NOW
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class FlashcardsController {
-
     private final MyDAO myDAO;
-
-    //Constructor Injection: this is telling the spring framework to wire up your
-    //dependencies for the flashcardsDAO.
 
     @Autowired
     public FlashcardsController(@Qualifier("flashcardsIMPL") MyDAO myDAO) {
@@ -38,7 +30,7 @@ public class FlashcardsController {
     public Flashcards addFlashcard(@RequestBody Flashcards theCard) {
         //also just in case they pass an id in JSON .... set id to o
         //this is to force a save of new item .... instead of update
-
+        System.out.println("");
         theCard.setId(0);
 
         //This will call the flashcardsDqoImpl.save method to save a new employee
