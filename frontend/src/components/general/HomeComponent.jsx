@@ -7,10 +7,10 @@ class HomeComponent extends Component {
             <div className="container">
                 <br />
                 <br />
-                <div className="jumbotron" style={{textAlign:"center", backgroundColor:"Black"}}>
-                    <h1 style={{color:"Green"}}>Welcome to the FlashCards app!</h1>
+                <div className="welcome">
+                    <h1 style={{color:"Black"}}>Welcome to the FlashCards app!</h1>
                     <br />
-                    <h2 style={{color:"white"}}>Please sign in <Link to="/SignIn">here</Link>.</h2>
+                    <h2 style={{color:"Black"}}>Please sign in <Link to="/SignIn">here</Link>.</h2>
                 </div>
             </div>
         )
