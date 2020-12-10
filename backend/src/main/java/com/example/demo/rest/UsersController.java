@@ -49,6 +49,7 @@ public class UsersController {
         //also just in case they pass an id in JSON .... set id to o
         //this is to force a save of new item .... instead of update
         theUser.setId(0);
+
         //This will call the usersDqoImpl.save method to save a new employee
         //through the usersDAO interface SPRING
         myDAO.save(theUser);

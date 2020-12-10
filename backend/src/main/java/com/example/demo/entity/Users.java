@@ -27,6 +27,9 @@ public class Users {
     @Column(name = "last_name")
     private String lastName;
 
+    @OneToMany(mappedBy="users")
+    private Set<FlashcardSets> sets;
+
 
     //default constructor
     public Users() {}
