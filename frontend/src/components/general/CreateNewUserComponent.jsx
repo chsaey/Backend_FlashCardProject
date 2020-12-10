@@ -68,9 +68,11 @@ class CreateNewUserComponent extends Component {
                                         <label>Password</label>
                                         <Field className="form-control" type="text" name="password" placeholder="password" />
                                     </fieldset>
-                                    <div className="footer1">
+                                    <fieldset className="form-group">
                                         <button className="btn" type="submit">Register</button>
-                                    </div>
+                                    </fieldset>
+                                    <br/>
+                                    <br/>
                                 </Form>
                             )
                         }

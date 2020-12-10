@@ -49,7 +49,6 @@ public class UsersController {
         //also just in case they pass an id in JSON .... set id to o
         //this is to force a save of new item .... instead of update
         theUser.setId(0);
-
         //This will call the usersDqoImpl.save method to save a new employee
         //through the usersDAO interface SPRING
         myDAO.save(theUser);
@@ -74,11 +73,11 @@ public class UsersController {
 
         //This will throw an exception if the employee is null
         if(tempUser == null) {
-            throw new RuntimeException("Employee is not found : " + userId);
+            return "User doesn't exist";
         }
 
         //This will execute the deleteByID.
         myDAO.deleteById(userId);
-        return "Deleted employee id : " + userId;
+        return "user employee id : " + userId;
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CardDataService from '../../services/CardDataService';
+import FlashcardDataService from '../../services/FlashcardDataService';
 
 class FlashcardComponent extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class FlashcardComponent extends Component {
     }
 
     refreshCardRegistry() {
-        CardDataService.retrieveAllCards()
+        FlashcardDataService.retrieveAllCards()
         .then(
             response => {
                 this.setState({
@@ -30,7 +30,7 @@ class FlashcardComponent extends Component {
 
     deleteCardClicked(id, question) {
         console.log('Delete Card Clicked')
-        CardDataService.deleteCard(id)
+        FlashcardDataService.deleteCard(id)
         .then(
             response => {
                 this.setState({message: `Deleted Card: ${question}`})
@@ -82,7 +82,7 @@ class FlashcardComponent extends Component {
                    </table>
                    <div className="row">
                        <br/>
-                       <button className="btn btn-success" onClick={this.addLindsayClicked}>Add Lindsay</button>
+                       <button className="btn btn-success" onClick={this.addCardClicked}>Add Flashcard</button>
                    </div>
                </div>
            </div>
