@@ -8,24 +8,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import static org.hamcrest.Matchers.any;
-import static org.mockito.Mockito.spy;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +21,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -52,6 +40,7 @@ class UsersControllerTest {
     UsersController userController;
 
     Gson gson = new Gson();
+
 
     @Test
     void findAll() {
@@ -73,32 +62,40 @@ class UsersControllerTest {
     }
 
     @Test
-    void addUser() {
-        Users user = new Users("chsaey", "pwd", " Charles", "Saeyang");
-        Users result = userController.addUser(user);
-        System.out.println(result.getFirstName());
-        assertThat(result.getFirstName().equals(user.getFirstName()));
-    }
-
-    @Test
-    void addUserMock() {
-        Users user = new Users("chsaey", "pwd", " Charles", "Saeyang");
+    void addUser() throws Exception {
+        Users user = new Users("testValue", "pwd", " Charles", "Saeyang");
         String userString = gson.toJson(user);
-        try {
-            mvc.perform(post("/addUser")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(userString))
-                    .andExpect(status().isOk());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Users result = userController.addUser(user);
+        assertThat(result.getFirstName().equals(user.getFirstName()));
+        String url = "/addUser";
+
+        mvc.perform(post(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(userString)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 
     @Test
-    void updateUser() {
+    void updateUser() throws Exception {
+        Users user = new Users("update", "pwd", " Charles", "Saeyang");
+        user.setId(4);
+        String userString = gson.toJson(user);
+        String url = "/updateUser";
+
+        mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(userString)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 
     @Test
-    void deleteUser() {
+    void deleteUser() throws Exception {
+        String url = "/deleteUser/" + 1;
+        mvc.perform(delete(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }

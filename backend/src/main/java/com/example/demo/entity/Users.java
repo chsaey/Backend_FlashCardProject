@@ -1,6 +1,10 @@
 package com.example.demo.entity;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity //This will let Java know that this is an entity that we are going to map to a database table.
 @Table(name = "users") //This is for the actual name of the database table we are mapping to the class.
@@ -22,6 +26,9 @@ public class Users {
 
     @Column(name = "last_name")
     private String lastName;
+
+/*    @OneToMany(mappedBy="users",cascade= CascadeType.ALL,orphanRemoval = true)
+    private Set<FlashcardSets> cardSets = new HashSet<>();*/
 
     //default constructor
     public Users() {}

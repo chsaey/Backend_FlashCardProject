@@ -73,11 +73,11 @@ public class UsersController {
 
         //This will throw an exception if the employee is null
         if(tempUser == null) {
-            throw new RuntimeException("Employee is not found : " + userId);
+            return "User doesn't exist";
         }
 
         //This will execute the deleteByID.
         myDAO.deleteById(userId);
-        return "Deleted employee id : " + userId;
+        return "user employee id : " + userId;
     }
 }
