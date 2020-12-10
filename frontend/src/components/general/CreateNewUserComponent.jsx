@@ -10,7 +10,7 @@ class CreateNewUserComponent extends Component {
             id: this.props.match.params.id,
             firstName: '',
             lastName: '',
-            username: '',
+            userName: '',
             password: ''
         }
         this.onSubmit = this.onSubmit.bind(this)
@@ -21,7 +21,7 @@ class CreateNewUserComponent extends Component {
             id: this.state.id,
             firstName: values.firstName,
             lastName: values.lastName,
-            username: values.username,
+            username: values.userName,
             password: values.password
         }
 
@@ -30,7 +30,7 @@ class CreateNewUserComponent extends Component {
     }
 
     render() {
-        let {id, firstName, lastName, username, password} = this.state
+        let {id, firstName, lastName, userName, password} = this.state
         return (
             <div className="base-container">
                 <br/>
@@ -41,7 +41,7 @@ class CreateNewUserComponent extends Component {
                 </div>
                     
                     <Formik
-                        initialValues={{id, firstName, lastName, username, password}}
+                        initialValues={{id, firstName, lastName, userName, password}}
                         onSubmit={this.onSubmit}
                         enableReinitialize={true}
                     >
@@ -62,15 +62,17 @@ class CreateNewUserComponent extends Component {
                                     </fieldset>
                                     <fieldset className="form-group">
                                         <label>Username</label>
-                                        <Field className="form-control" type="text" name="username" placeholder="username" />
+                                        <Field className="form-control" type="text" name="userName" placeholder="username" />
                                     </fieldset>
                                     <fieldset className="form-group">
                                         <label>Password</label>
                                         <Field className="form-control" type="text" name="password" placeholder="password" />
                                     </fieldset>
-                                    <div className="footer1">
+                                    <fieldset className="form-group">
                                         <button className="btn" type="submit">Register</button>
-                                    </div>
+                                    </fieldset>
+                                    <br/>
+                                    <br/>
                                 </Form>
                             )
                         }

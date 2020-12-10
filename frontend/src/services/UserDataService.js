@@ -6,6 +6,14 @@ class UserDataService {
         return axios.get('http://localhost:8080/retrieveAllUsers')
     }
 
+    findUserById(id) {
+        return axios.get(`http://localhost:8080/findUserById/${id}`)
+    }
+
+    findUserByLogin(userName, password) {
+        return axios.get(`http://localhost:8080/findUserByLogin/${userName}/${password}`)
+    }
+
     deleteUser(id) {
         return axios.delete(`http://localhost:8080/deleteUser/${id}`)
     }
