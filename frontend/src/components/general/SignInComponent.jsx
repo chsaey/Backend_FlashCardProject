@@ -13,12 +13,27 @@ class SignInComponent extends Component {
     }
 
     onSubmit(values) {
+
         let user = {
             username: values.userName,
             password: values.password
         }
 
-        UserDataService.findUserByLogin(user)
+        UserDataService.retrieveAllUser()
+        .then(
+            (response) => {
+                var obj = JSON.parse(response);
+                const json = JSON.stringify(response);
+                console.log(json)
+                for(var prop in obj) {
+                    var item = obj[prop];
+                    console.log(prop);
+                }
+                
+            }
+        )
+
+        
     }
 
     render() {
