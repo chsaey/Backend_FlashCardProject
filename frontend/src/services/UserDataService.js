@@ -10,8 +10,8 @@ class UserDataService {
         return axios.get(`http://localhost:8080/findUserById/${id}`)
     }
 
-    findUserByLogin(username, password) {
-        return axios.get(`http://localhost:8080/findUserByLogin/${username}/${password}`)
+    findUserByLogin(userName, password) {
+        return axios.get(`http://localhost:8080/findUserByLogin/${userName}/${password}`)
     }
 
     deleteUser(id) {
