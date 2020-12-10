@@ -17,20 +17,19 @@ public class FlashcardSets {
     @Column(name = "id") //This is mapping the primary key to the id column in the table.
     private int id;
 
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name="userID", nullable = false)
-    @JsonIgnore
-    private Users users;
-
     @Column(name = "name")
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "userID", nullable = false)
+    private Users users;
 
 /*    @OneToMany(mappedBy="FlashcardSets",cascade= CascadeType.ALL,orphanRemoval = true)
     private Set<Flashcards> cards = new HashSet<>();*/
 
-    public FlashcardSets() {}
+    public FlashcardSets() {
+    }
 
     public FlashcardSets(Users users, String name) {
         this.users = users;

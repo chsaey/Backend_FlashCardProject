@@ -45,7 +45,6 @@ class UsersControllerTest {
     @Test
     void findAll() {
 
-
         Users user = new Users("chsaey", "pwd", " Charles", "Saeyang");
         Users user2 = new Users("dfel08", "pwd", " Dan", "Fellows");
         Users user3 = new Users("dodanghiep12", "pwd", " Hiep", "Do");
@@ -62,11 +61,28 @@ class UsersControllerTest {
     }
 
     @Test
+    void findByID() throws Exception {
+        String url = "/findUserById/2";
+        mvc.perform(get(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void findByLogin() throws Exception {
+        String url = "/findUserByLogin/Dummy2/pwd";
+        mvc.perform(get(url)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     void addUser() throws Exception {
         Users user = new Users("testValue", "pwd", " Charles", "Saeyang");
         String userString = gson.toJson(user);
-        Users result = userController.addUser(user);
-        assertThat(result.getFirstName().equals(user.getFirstName()));
+
         String url = "/addUser";
 
         mvc.perform(post(url)

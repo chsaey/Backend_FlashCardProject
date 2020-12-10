@@ -27,8 +27,6 @@ public class Users {
     @Column(name = "last_name")
     private String lastName;
 
-/*    @OneToMany(mappedBy="users",cascade= CascadeType.ALL,orphanRemoval = true)
-    private Set<FlashcardSets> cardSets = new HashSet<>();*/
 
     //default constructor
     public Users() {}
