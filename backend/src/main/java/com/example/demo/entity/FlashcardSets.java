@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -10,6 +11,7 @@ import java.util.Set;
 
 @Entity //This will let Java know that this is an entity that we are going to map to a database table.
 @Table(name = "flashcardset") //This is for the actual name of the database table we are mapping to the class.
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class FlashcardSets {
 
     @Id //This will map the primary key.
@@ -26,20 +28,17 @@ public class FlashcardSets {
     @JsonIgnore
     private Users users;
 
-    @OneToMany(mappedBy="flashcardset")
-    private Set<Flashcards> cards;
-
     @Column(name = "userID", updatable = false, insertable = false)
     private int userID;
+
+
+    @OneToMany(mappedBy = "setID")
+    private Set<Flashcards> cards;
 
 
     public FlashcardSets() {
     }
 
-    public FlashcardSets(Users users, String name) {
-        this.users = users;
-        this.name = name;
-    }
 
     public int getId() {
         return id;

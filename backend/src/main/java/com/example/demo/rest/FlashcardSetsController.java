@@ -18,9 +18,6 @@ import java.util.List;
 public class FlashcardSetsController {
     private final MyDAO myDAO;
 
-
-    //Constructor Injection: this is telling the spring framework to wire up your
-    //dependencies for the flashcardsetsDAO.
     @Autowired
     public FlashcardSetsController(@Qualifier("flashcardSetsIMPL") MyDAO myDAO) {
         this.myDAO = myDAO;

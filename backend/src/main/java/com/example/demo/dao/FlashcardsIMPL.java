@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import com.example.demo.entity.FlashcardSets;
 import com.example.demo.entity.Flashcards;
 import com.example.demo.entity.Users;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class FlashcardsIMPL implements  MyDAO{
 
     //Define field for entity manager
@@ -30,6 +32,7 @@ public class FlashcardsIMPL implements  MyDAO{
     @Transactional //Defines the scope of a single database transaction.
     public List<Object> fetchAll() {
         Session currentSession = entityManager.unwrap(Session.class);
+        System.out.println("hello world");
         Query<Object> myQuery = currentSession.createQuery("from Flashcards");
         return myQuery.getResultList();
     }
@@ -51,7 +54,7 @@ public class FlashcardsIMPL implements  MyDAO{
     public void save(Object theCard) {
         Session currentSession = entityManager.unwrap(Session.class);
         Flashcards temp = (Flashcards) theCard;
-        Query<Object> myQuery = currentSession.createQuery("from flashcardset where id like :i");
+        Query<Object> myQuery = currentSession.createQuery("from FlashcardSets where id like :i");
         myQuery.setParameter("i",temp.getSetID());
         temp.setFlashcardSets((FlashcardSets) myQuery.getResultList().get(0));
         currentSession.saveOrUpdate(temp);
