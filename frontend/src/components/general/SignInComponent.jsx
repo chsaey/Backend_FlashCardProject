@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
+import { Redirect } from "react-router-dom";
 import UserDataService from '../../services/UserDataService';
 import { Formik, Form, Field } from 'formik';
-
 class SignInComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
             userName: '',
-            password: ''
+            password: '',
+            redirect: false,
+            id:0
         }
         this.onSubmit = this.onSubmit.bind(this)
     }
@@ -22,28 +24,44 @@ class SignInComponent extends Component {
         UserDataService.retrieveAllUser()
         .then(
             (response) => {
-                response.data.forEach(function(find) {            
-                    if(find.userName === user.username && find.password === user.password){
-                        console.log("found");
-                        //ROUTE TO page, pass find as prop
+
+                response.data.forEach((element) => {
+                    if(element.userName === user.username && element.password === user.password){
+                        this.setState({
+                            id: element.id,
+                            redirect : true
+                          });       
+     
+
                     }
-                });   
-                
+            
+                });
             }
         )        
     }
 
     render() {
         let {userName, password} = this.state
-        return (
+        if (this.state.redirect) {
+            //return <Redirect to={"/FlashcardSets"} />  
+            
+            return <Redirect
+            to={{
+            pathname: "/FlashcardSets",
+            state: { id: this.state.id }
+          }}
+        />
+        }
+
+        return (  
+            
             <div className="base-container">
                 <br/>
                 <div className="header">Sign In</div>
                 <div className="content">
                 <div className="image">
                     <img src="https://images-na.ssl-images-amazon.com/images/I/61CfipGxS-L._AC_SL1001_.jpg" alt="new"/>
-                </div>
-                    
+                </div>                    
                     <Formik
                         initialValues={{userName, password}}
                         onSubmit={this.onSubmit}

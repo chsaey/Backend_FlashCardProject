@@ -5,8 +5,9 @@ class FlashcardSetComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            flashcardSets: []
-        }
+            flashcardSets: [],
+            id:this.props.location.state.id
+        }    
 
         this.refreshFlashcardSetRegistry = this.refreshFlashcardRegistry.bind(this)
         this.deleteFlashcardSetClicked = this.deleteFlashcardSetClicked.bind(this)
@@ -65,8 +66,8 @@ class FlashcardSetComponent extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {
-                                this.state.flashcardSets.map(
+                            {                              
+                                this.state.flashcardSets.filter(elements => elements.id == this.state.id).map(
                                     flashcardSets =>
                                         <tr style={{ textAlign: "center" }} key={flashcardSets.id}>
                                             <td>{flashcardSets.id}</td>
