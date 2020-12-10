@@ -39,12 +39,6 @@ public class FlashcardsController {
         //also just in case they pass an id in JSON .... set id to o
         //this is to force a save of new item .... instead of update
 
-        //get user to put in set
-        Users user = new Users();
-
-        //get set to put in card
-
-
         theCard.setId(0);
 
         //This will call the flashcardsDqoImpl.save method to save a new employee
