@@ -25,6 +25,10 @@ public class FlashcardSets {
     @JsonIgnore
     private Users users;
 
+
+    @Column(name = "userID", updatable = false, insertable = false)
+    private int userID;
+
 /*    @OneToMany(mappedBy="FlashcardSets",cascade= CascadeType.ALL,orphanRemoval = true)
     private Set<Flashcards> cards = new HashSet<>();*/
 
@@ -58,6 +62,14 @@ public class FlashcardSets {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     @Override
