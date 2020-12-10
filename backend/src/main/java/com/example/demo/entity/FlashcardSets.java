@@ -1,6 +1,11 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
+
 
 @Entity //This will let Java know that this is an entity that we are going to map to a database table.
 @Table(name = "flashcardset") //This is for the actual name of the database table we are mapping to the class.
@@ -11,14 +16,20 @@ public class FlashcardSets {
     @Column(name = "id") //This is mapping the primary key to the id column in the table.
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name="userID")
-    private Users users;
-
     @Column(name = "name")
     private String name;
 
-    public FlashcardSets() {}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "userID", nullable = false)
+    @JsonIgnore
+    private Users users;
+
+/*    @OneToMany(mappedBy="FlashcardSets",cascade= CascadeType.ALL,orphanRemoval = true)
+    private Set<Flashcards> cards = new HashSet<>();*/
+
+    public FlashcardSets() {
+    }
 
     public FlashcardSets(Users users, String name) {
         this.users = users;

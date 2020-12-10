@@ -1,5 +1,9 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 
@@ -13,8 +17,10 @@ public class Flashcards {
     @Column(name = "id") //This is mapping the primary key to the id column in the table.
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name="setID")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "setID", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private FlashcardSets flashcardSets;
 
     @Column(name = "question")
