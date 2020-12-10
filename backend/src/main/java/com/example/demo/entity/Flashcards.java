@@ -17,11 +17,23 @@ public class Flashcards {
     @Column(name = "id") //This is mapping the primary key to the id column in the table.
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "setID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY,  optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "setID", nullable = false)
     @JsonIgnore
     private FlashcardSets flashcardSets;
+
+
+    @Column(name = "setID", updatable = false, insertable = false)
+    private int setID;
+
+    public int getSetID() {
+        return setID;
+    }
+    public void setSetID(int setID) {
+        this.setID = setID;
+    }
+
 
     @Column(name = "question")
     private String question;

@@ -38,7 +38,7 @@ public class FlashcardsController {
     public Flashcards addFlashcard(@RequestBody Flashcards theCard) {
         //also just in case they pass an id in JSON .... set id to o
         //this is to force a save of new item .... instead of update
-        System.out.println("123123213123123123112312321312312312312312312312312312312123123213123123123123123123123123123121231232131231231231231231231231231231212312321312312312312312312312312312312123123213123123123123123123123123123122312312312312312312");
+        System.out.println("");
         theCard.setId(0);
 
         //This will call the flashcardsDqoImpl.save method to save a new employee

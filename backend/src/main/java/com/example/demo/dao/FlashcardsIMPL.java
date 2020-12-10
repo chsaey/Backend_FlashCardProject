@@ -1,6 +1,8 @@
 package com.example.demo.dao;
 
+import com.example.demo.entity.FlashcardSets;
 import com.example.demo.entity.Flashcards;
+import com.example.demo.entity.Users;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +50,11 @@ public class FlashcardsIMPL implements  MyDAO{
     @Transactional //Defines the scope of a single database transaction.
     public void save(Object theCard) {
         Session currentSession = entityManager.unwrap(Session.class);
-        currentSession.saveOrUpdate(theCard);
+        Flashcards temp = (Flashcards) theCard;
+        Query<Object> myQuery = currentSession.createQuery("from flashcardset where id like :i");
+        myQuery.setParameter("i",temp.getSetID());
+        temp.setFlashcardSets((FlashcardSets) myQuery.getResultList().get(0));
+        currentSession.saveOrUpdate(temp);
     }
 
     @Override
