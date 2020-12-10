@@ -82,7 +82,7 @@ class FlashcardComponent extends Component {
                    </table>
                    <div className="row">
                        <br/>
-                       <button className="btn btn-success" onClick={this.addLindsayClicked}>Add Lindsay</button>
+                       <button className="btn btn-success" onClick={this.addCardClicked}>Add Flashcard</button>
                    </div>
                </div>
            </div>

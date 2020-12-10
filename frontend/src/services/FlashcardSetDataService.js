@@ -6,15 +6,15 @@ class FlashcardSetDataService {
         return axios.get(`http://localhost:8080/retrieveAllFlashcardSets`)
     }
 
-    deleteCard(id) {
-        return axios.delete(`http://localhost:8080/deleteFlashcard/${id}`)
+    deleteFlashcardSet(id) {
+        return axios.delete(`http://localhost:8080/deleteFlashcardSet/${id}`)
     }
 
-    updateCard(cardSet) {
+    updateFlashcardSet(cardSet) {
         return axios.put(`http://localhost:8080/updateFlashcardSet`, cardSet)
     }
 
-    createCard(cardSet) {
+    createFlashcardSet(cardSet) {
         return axios.post(`http://localhost:8080/addFlashcardSet`, cardSet)
     }
 }
