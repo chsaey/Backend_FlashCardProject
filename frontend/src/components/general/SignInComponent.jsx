@@ -22,18 +22,15 @@ class SignInComponent extends Component {
         UserDataService.retrieveAllUser()
         .then(
             (response) => {
-                var obj = JSON.parse(response);
-                const json = JSON.stringify(response);
-                console.log(json)
-                for(var prop in obj) {
-                    var item = obj[prop];
-                    console.log(prop);
-                }
+                response.data.forEach(function(find) {            
+                    if(find.userName === user.username && find.password === user.password){
+                        console.log("found");
+                        //ROUTE TO page, pass find as prop
+                    }
+                });   
                 
             }
-        )
-
-        
+        )        
     }
 
     render() {
