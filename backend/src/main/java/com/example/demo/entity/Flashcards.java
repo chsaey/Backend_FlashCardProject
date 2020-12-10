@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 //Employee Entity
 @Entity //This will let Java know that this is an entity that we are going to map to a database table.
 @Table(name = "flashcard") //This is for the actual name of the database table we are mapping to the class.
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Flashcards {
 
     @Id //This will map the primary key.
@@ -17,11 +19,15 @@ public class Flashcards {
     @Column(name = "id") //This is mapping the primary key to the id column in the table.
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "setID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY,  optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "setID", nullable = false)
     @JsonIgnore
-    private FlashcardSets flashcardSets;
+    private FlashcardSets flashcardsets;
+
+    @JsonIgnore
+    @Column(name = "setID", updatable = false, insertable = false)
+    private int setID;
 
     @Column(name = "question")
     private String question;
@@ -29,12 +35,15 @@ public class Flashcards {
     @Column(name = "answer")
     private String answer;
 
-    public Flashcards() {}
+    public Flashcards() {
 
-    public Flashcards(FlashcardSets flashcardSets, String question, String answer) {
-        this.flashcardSets = flashcardSets;
-        this.question = question;
-        this.answer = answer;
+    }
+    public int getSetID() {
+        return setID;
+    }
+
+    public void setSetID(int setID) {
+        this.setID = setID;
     }
 
     public int getId() {
@@ -46,11 +55,11 @@ public class Flashcards {
     }
 
     public FlashcardSets getFlashcardSets() {
-        return flashcardSets;
+        return flashcardsets;
     }
 
-    public void setFlashcardSets(FlashcardSets flashcardSets) {
-        this.flashcardSets = flashcardSets;
+    public void setFlashcardSets(FlashcardSets flashcardsets) {
+        this.flashcardsets = flashcardsets;
     }
 
     public String getQuestion() {
@@ -73,7 +82,7 @@ public class Flashcards {
     public String toString() {
         return "Flashcards{" +
                 "id=" + id +
-                ", flashcardSets=" + flashcardSets +
+                ", flashcardsets=" + flashcardsets +
                 ", question='" + question + '\'' +
                 ", answer='" + answer + '\'' +
                 '}';
