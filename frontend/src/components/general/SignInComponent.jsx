@@ -24,14 +24,12 @@ class SignInComponent extends Component {
         UserDataService.retrieveAllUser()
         .then(
             (response) => {
-
                 response.data.forEach((element) => {
                     if(element.userName === user.username && element.password === user.password){
                         this.setState({
                             id: element.id,
                             redirect : true
-                          });       
-     
+                          });     
 
                     }
             
