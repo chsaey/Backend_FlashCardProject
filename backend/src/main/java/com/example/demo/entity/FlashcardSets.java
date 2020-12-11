@@ -31,7 +31,6 @@ public class FlashcardSets {
     @Column(name = "userID", updatable = false, insertable = false)
     private int userID;
 
-
     @OneToMany(mappedBy = "setID")
     private Set<Flashcards> cards;
 
