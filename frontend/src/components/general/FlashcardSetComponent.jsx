@@ -9,7 +9,8 @@ class FlashcardSetComponent extends Component {
             flashcardSets: [],
             id:this.props.location.state.id,
             renderCards: false,
-            setID:0
+            setID:0,
+            updatedName:""
         }    
 
         this.refreshFlashcardSetRegistry = this.refreshFlashcardRegistry.bind(this)
@@ -47,13 +48,35 @@ class FlashcardSetComponent extends Component {
     }
 
     updateFlashcardSetClicked(id) {
-        this.props.history.push(`/theFlashcardSet/`)
-        
+
+    const enteredName = prompt('Rename set')
+    id.name = enteredName    
+    FlashcardSetDataService.updateFlashcardSet(id)
+    .then(
+        response =>{
+            this.setState({message: "udpated"})
+            alert(this.state.message)
+            this.refreshFlashcardSetRegistry();
+        }
+    )   
     }
 
-    addFlashcardSetClicked(id) {
-        console.log("Add Flashcard Set Clicked")
-        this.props.history.push(`/theFlashcardSet/1`)
+    addFlashcardSetClicked() {
+        let set = {
+            name: "",
+            userID: this.state.id
+        }
+
+        set.name = prompt('Add a new set')  
+
+        FlashcardSetDataService.createFlashcardSet(set)
+        .then(
+            response =>{
+                this.setState({message: "add"})
+                alert(this.state.message)
+                this.refreshFlashcardSetRegistry();
+            }
+        )         
     }
 
     
@@ -61,13 +84,11 @@ class FlashcardSetComponent extends Component {
         this.setState({
             setID:id,
             renderCards: true
-        })           
+        })          
 
     }
 
     render() {
-        console.log(this.state.renderCards)
-        console.log(this.state.setID)
         if(this.state.renderCards){
                 //return <Redirect to={"/FlashcardSets"} />                  
                 return <Redirect
@@ -87,7 +108,7 @@ class FlashcardSetComponent extends Component {
                             <tr style={{ textAlign: "center", color: "black" }}>
                                 <th>ID</th>
                                 <th>Flashcard Set</th>
-                                <th>User ID</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -97,8 +118,7 @@ class FlashcardSetComponent extends Component {
                                         <tr style={{ textAlign: "center" }} key={flashcardSets.id}>
                                             <td>{flashcardSets.id}</td>
                                             <td>{flashcardSets.name}</td>
-                                            <td>{flashcardSets.userID}</td>
-                                            <td><button className="btn btn-success" onClick={() => this.studyFlashcardSetClicked(flashcardSets.id)}>Study</button></td>
+                                            <td><button className="btn btn-success" onClick={() => this.studyFlashcardSetClicked(flashcardSets)}>Study</button></td>
                                             <td><button className="btn btn-warning" onClick={() => this.deleteFlashcardSetClicked(flashcardSets.id, flashcardSets.name)}>Delete</button></td>
                                             <td><button className="btn btn-success" onClick={() => this.updateFlashcardSetClicked(flashcardSets)}>Update</button></td>
                                         </tr>
