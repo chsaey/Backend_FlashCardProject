@@ -119,8 +119,8 @@ class FlashcardSetComponent extends Component {
                                             <td>{flashcardSets.id}</td>
                                             <td>{flashcardSets.name}</td>
                                             <td><button className="btn btn-success" onClick={() => this.studyFlashcardSetClicked(flashcardSets)}>Study</button></td>
-                                            <td><button className="btn btn-warning" onClick={() => this.deleteFlashcardSetClicked(flashcardSets.id, flashcardSets.name)}>Delete</button></td>
-                                            <td><button className="btn btn-success" onClick={() => this.updateFlashcardSetClicked(flashcardSets)}>Update</button></td>
+                                            <td><button className="btn btn-danger" onClick={() => this.deleteFlashcardSetClicked(flashcardSets.id, flashcardSets.name)}>Delete</button></td>
+                                            <td><button className="btn btn-warning" onClick={() => this.updateFlashcardSetClicked(flashcardSets)}>Update</button></td>
                                         </tr>
                                 )
                             }
@@ -128,7 +128,7 @@ class FlashcardSetComponent extends Component {
                     </table>
                     <div className="row">
                         <br />
-                        <button className="btn btn-success" onClick={this.addFlashcardSetClicked}>Add Flashcard Set</button>
+                        <button className="btn btn-info" onClick={this.addFlashcardSetClicked}>Add Flashcard Set</button>
                     </div>
                 </div>
             </div>
