@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//This is to allow calls from React... NOT IMPORTANT RIGHT NOW
+//This is to allow calls from React. CORS errors are dumb
 @CrossOrigin(origins = { "http://localhost:3000"})
 @RestController
 public class UsersController {
@@ -35,12 +35,11 @@ public class UsersController {
         return myDAO.fetchById(Id);
     }
 
-    //Get a user by their ID
+    //Get a user with a password and username combination
     @GetMapping("/findUserByLogin/{username}/{password}")
     public Object findByLogin(@PathVariable String username, @PathVariable String password){
         return myDAO.fetchByLogin(username,password);
     }
-
 
     //This is a POST request to add a new user.
     //http://localhost:8080/addUser
@@ -50,7 +49,7 @@ public class UsersController {
         //this is to force a save of new item .... instead of update
         theUser.setId(0);
 
-        //This will call the usersDqoImpl.save method to save a new employee
+        //This will call the usersDqoImpl.save method to save a new user
         //through the usersDAO interface SPRING
         myDAO.save(theUser);
         return theUser;
@@ -60,7 +59,7 @@ public class UsersController {
     //http://localhost:8080/updateUser
     @PutMapping("/updateUser")
     public Users updateUser(@RequestBody Users updateUser) {
-        //No theEmployee.setId(0); this will execute an update instead of a create
+        //this will execute an update instead of a create
         myDAO.save(updateUser);
         return updateUser;
     }
@@ -69,7 +68,7 @@ public class UsersController {
     //http://localhost:8080/deleteUser/1
     @DeleteMapping("/deleteUser/{userId}")
     public String deleteUser(@PathVariable int userId) {
-        //Creating a tempUser to check to see if an employee exists
+        //Creating a tempUser to check to see if a user exists
         Users tempUser = (Users) myDAO.fetchById(userId);
 
         //This will throw an exception if the employee is null
@@ -79,6 +78,6 @@ public class UsersController {
 
         //This will execute the deleteByID.
         myDAO.deleteById(userId);
-        return "user employee id : " + userId;
+        return "Deleted user id : " + userId;
     }
 }

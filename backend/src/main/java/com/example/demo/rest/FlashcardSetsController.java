@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//This is to allow calls from React... NOT IMPORTANT RIGHT NOW
+//This is to allow calls from React
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class FlashcardSetsController {
@@ -34,7 +34,6 @@ public class FlashcardSetsController {
     //http://localhost:8080/addFlashcardSet
     @PostMapping("/addFlashcardSet")
     public FlashcardSets addFlashcardSet(@RequestBody FlashcardSets flashcardSets) {
-
         myDAO.save(flashcardSets);
         return flashcardSets;
     }
@@ -45,16 +44,17 @@ public class FlashcardSetsController {
     public FlashcardSets updateFlashcardSet(@RequestBody FlashcardSets updateFlashcardSet) {
         FlashcardSets result = (FlashcardSets) myDAO.fetchById(updateFlashcardSet.getId());
         result.setName(updateFlashcardSet.getName());
-        //No theEmployee.setId(0); this will execute an update instead of a create
+        //this will execute an update instead of a create
         myDAO.save(result);
         return result;
     }
 
-    //This is a DELETE request to delete an existing employee.
+    //This is a DELETE request to delete an existing set.
     //http://localhost:8080/deleteFlashcardSet/1
     @DeleteMapping("/deleteFlashcardSet/{flashcardSetId}")
-    public String deleteEmployee(@PathVariable int flashcardSetId) {
-        //Creating a tempFlashcardSet to check to see if an employee exists
+    public String deleteCardSet(@PathVariable int flashcardSetId) {
+
+        //Creating a tempFlashcardSet to check to see if it exists the in the DB
         FlashcardSets tempFlashcardSet = (FlashcardSets) myDAO.fetchById(flashcardSetId);
 
         //This will throw an exception if the flashcardSet is null
