@@ -118,10 +118,10 @@ class FlashcardComponent extends Component {
                                    <tr style={{textAlign: "center"}} key={cards.id}>
                                        <td>{cards.id}</td>
                                        <td>{cards.question}</td>
-                                       <td><button className="btn btn-success" onClick={() => this.showAnswer(cards.answer)}>Update</button></td>
+                                       <td><button className="btn btn-success" onClick={() => this.showAnswer(cards.answer)}>Show Answer</button></td>
                                        <td>{cards.setID}</td>
-                                       <td><button className="btn btn-warning" onClick={() => this.deleteCardClicked(cards.id, cards.question)}>Delete</button></td>
-                                       <td><button className="btn btn-success" onClick={() => this.updateCardClicked(cards)}>Update</button></td>
+                                       <td><button className="btn btn-danger" onClick={() => this.deleteCardClicked(cards.id, cards.question)}>Delete</button></td>
+                                       <td><button className="btn btn-warning" onClick={() => this.updateCardClicked(cards)}>Update</button></td>
                                    </tr>
                                )
                            }
@@ -129,7 +129,7 @@ class FlashcardComponent extends Component {
                    </table>
                    <div className="row">
                        <br/>
-                       <button className="btn btn-success" onClick={this.addCardClicked}>Add Flashcard</button>
+                       <button className="btn btn-info" onClick={this.addCardClicked}>Add Flashcard</button>
                    </div>
                </div>
            </div>
