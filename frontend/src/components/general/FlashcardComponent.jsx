@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import FlashcardDataService from '../../services/FlashcardDataService';
+import HideAnswerComponent from './HideAnswerComponent';
 
 class FlashcardComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            cards: []
+            cards: [],
+            id: this.props.location.state.id.id,
+            entity: this.props.location.state.id
         }
+        console.log(this.state.entity)
         this.refreshCardRegistry = this.refreshCardRegistry.bind(this)
         this.deleteCardClicked = this.deleteCardClicked.bind(this)
         this.updateCardClicked = this.updateCardClicked.bind(this)
         this.addCardClicked = this.addCardClicked.bind(this)
+        this.showAnswer = this.showAnswer.bind(this)
     }
 
     componentDidMount() {
@@ -40,14 +45,57 @@ class FlashcardComponent extends Component {
         )
     }
 
+    showAnswer(answer) {
+        alert(answer) 
+    }
+
+
     updateCardClicked(id) {
         console.log('Update Card Clicked')
-        this.props.history.push(`/card/${id}`)
+        let card = {
+            id: id.id,
+            question: id.question,
+            answer: id.answer,
+            flashcardSets: id.flashcardSets,
+            setID: 0
+        }
+        let tempQ = prompt('Edit question')
+        let tempA = prompt('Edit Answer')
+
+        card.question = tempQ ? tempQ:id.question
+        card.answer = tempA ? tempA:id.answer
+
+ 
+        FlashcardDataService.updateCard(card)
+        .then(
+            response =>{
+                this.setState({message: "udpated"})
+                alert(this.state.message)
+                this.refreshCardRegistry();     
+            }
+        )   
+
     }
 
     addCardClicked() {
         console.log('Add Card Clicked')
-        this.props.history.push(`/theCard/-1`)
+        let card = {
+            question:"" ,
+            answer:"" ,
+            flashcardSets: this.state.entity,
+            setID: 0
+        }
+        card.question = prompt('Add question')
+        card.answer = prompt('Add Answer')
+ 
+        FlashcardDataService.createCard(card)
+        .then(
+            response =>{
+                this.setState({message: "added"})
+                alert(this.state.message)
+                this.refreshCardRegistry();     
+            }
+        )   
     }
 
     render() {
@@ -61,20 +109,19 @@ class FlashcardComponent extends Component {
                                <th>ID</th>
                                <th>Question</th>
                                <th>Answer</th>
-                               <th>Set ID</th>
                            </tr>
                        </thead>
                        <tbody>
                            {
-                               this.state.cards.map (
+                               this.state.cards.filter(set => set.flashcardSets.id === this.state.id).map (
                                    cards => 
                                    <tr style={{textAlign: "center"}} key={cards.id}>
                                        <td>{cards.id}</td>
                                        <td>{cards.question}</td>
-                                       <td>{cards.answer}</td>
+                                       <td><button className="btn btn-success" onClick={() => this.showAnswer(cards.answer)}>Show Answer</button></td>
                                        <td>{cards.setID}</td>
-                                       <td><button className="btn btn-warning" onClick={() => this.deleteCardClicked(cards.id, cards.question)}>Delete</button></td>
-                                       <td><button className="btn btn-success" onClick={() => this.updateCardClicked(cards.id)}>Update</button></td>
+                                       <td><button className="btn btn-danger" onClick={() => this.deleteCardClicked(cards.id, cards.question)}>Delete</button></td>
+                                       <td><button className="btn btn-warning" onClick={() => this.updateCardClicked(cards)}>Update</button></td>
                                    </tr>
                                )
                            }
@@ -82,7 +129,7 @@ class FlashcardComponent extends Component {
                    </table>
                    <div className="row">
                        <br/>
-                       <button className="btn btn-success" onClick={this.addCardClicked}>Add Flashcard</button>
+                       <button className="btn btn-info" onClick={this.addCardClicked}>Add Flashcard</button>
                    </div>
                </div>
            </div>

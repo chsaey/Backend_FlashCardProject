@@ -8,6 +8,7 @@ import CreateNewUserComponent from './CreateNewUserComponent';
 import FlashcardComponent from './FlashcardComponent';
 import FlashcardSetComponent from './FlashcardSetComponent';
 
+
 class RouterComponent extends Component {
     render() {
         return (
@@ -18,7 +19,8 @@ class RouterComponent extends Component {
                             <Route exact path="/"><HomeComponent /></Route>
                             <Route path="/SignIn"><SignInComponent /></Route>
                             <Route path="/CreateNewUser/:id" component={CreateNewUserComponent} />
-                            <Route path="/:username/:password/:userID" component={FlashcardSetComponent} />
+                            <Route path="/FlashcardSets" component={FlashcardSetComponent} />
+                            <Route path="/cardSet" component={FlashcardComponent} />
                             <Route path="/:username/:password/:userID/:flashcardsSetID" component={FlashcardComponent} />
                         </Switch>
                     <FooterComponent />

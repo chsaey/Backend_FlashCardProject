@@ -4,6 +4,7 @@ import com.example.demo.entity.FlashcardSets;
 import com.example.demo.entity.Flashcards;
 import com.example.demo.entity.Users;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.gson.Gson;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,6 @@ public class FlashcardsIMPL implements  MyDAO{
     @Transactional //Defines the scope of a single database transaction.
     public List<Object> fetchAll() {
         Session currentSession = entityManager.unwrap(Session.class);
-        System.out.println("hello world");
         Query<Object> myQuery = currentSession.createQuery("from Flashcards");
         return myQuery.getResultList();
     }
@@ -55,7 +55,7 @@ public class FlashcardsIMPL implements  MyDAO{
         Session currentSession = entityManager.unwrap(Session.class);
         Flashcards temp = (Flashcards) theCard;
         Query<Object> myQuery = currentSession.createQuery("from FlashcardSets where id like :i");
-        myQuery.setParameter("i",temp.getSetID());
+        myQuery.setParameter("i",temp.getFlashcardSets().getId());
         temp.setFlashcardSets((FlashcardSets) myQuery.getResultList().get(0));
         currentSession.saveOrUpdate(temp);
     }
