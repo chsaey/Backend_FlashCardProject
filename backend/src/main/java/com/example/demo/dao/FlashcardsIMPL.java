@@ -33,7 +33,6 @@ public class FlashcardsIMPL implements  MyDAO{
     @Transactional //Defines the scope of a single database transaction.
     public List<Object> fetchAll() {
         Session currentSession = entityManager.unwrap(Session.class);
-        System.out.println("hello world");
         Query<Object> myQuery = currentSession.createQuery("from Flashcards");
         return myQuery.getResultList();
     }
@@ -55,10 +54,8 @@ public class FlashcardsIMPL implements  MyDAO{
     public void save(Object theCard) {
         Session currentSession = entityManager.unwrap(Session.class);
         Flashcards temp = (Flashcards) theCard;
-        Gson gson = new Gson();
         Query<Object> myQuery = currentSession.createQuery("from FlashcardSets where id like :i");
         myQuery.setParameter("i",temp.getFlashcardSets().getId());
-        System.out.println(gson.toJson(temp) );
         temp.setFlashcardSets((FlashcardSets) myQuery.getResultList().get(0));
         currentSession.saveOrUpdate(temp);
     }
