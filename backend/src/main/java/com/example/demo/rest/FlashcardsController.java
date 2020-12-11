@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-//This is to allow calls from React... NOT IMPORTANT RIGHT NOW
+//This is to allow calls from React
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class FlashcardsController {
@@ -28,36 +28,36 @@ public class FlashcardsController {
     //http://localhost:8080/addFlashcard
     @PostMapping("/addFlashcard")
     public Flashcards addFlashcard(@RequestBody Flashcards theCard) {
+
         //also just in case they pass an id in JSON .... set id to o
         //this is to force a save of new item .... instead of update
-        System.out.println("");
         theCard.setId(0);
 
-        //This will call the flashcardsDqoImpl.save method to save a new employee
+        //This will call the flashcardsImpl.save method to save a new flashcard
         //through the flashcardsDAO interface SPRING
         myDAO.save(theCard);
         return theCard;
     }
 
-    //This is a PUT request to update an existing employee.
+    //This is a PUT request to update an existing flashcard.
     //http://localhost:8080/updateFlashcard
     @PutMapping("/updateFlashcard")
     public Flashcards updateFlashcard(@RequestBody Flashcards updateFlashcard) {
-        //No theEmployee.setId(0); this will execute an update instead of a create
+        //this will execute an update instead of a create
         myDAO.save(updateFlashcard);
         return updateFlashcard;
     }
 
-    //This is a DELETE request to delete an existing employee.
+    //This is a DELETE request to delete an existing flashcard.
     //http://localhost:8080/deleteFlashcard/1
     @DeleteMapping("/deleteFlashcard/{flashcardId}")
     public String deleteFlashcard(@PathVariable int flashcardId) {
-        //Creating a tempFlashcards to check to see if an employee exists
+        //Creating a tempFlashcards to check to see if a card exists exists
         Flashcards tempFlashcards = (Flashcards) myDAO.fetchById(flashcardId);
 
-        //This will throw an exception if the employee is null
+        //This will throw an exception if the card is null
         if (tempFlashcards == null) {
-            throw new RuntimeException("Flashcard is not found : " + flashcardId);
+            throw new RuntimeException("Flash card is not found : " + flashcardId);
         }
 
         //This will execute the deleteByID.
