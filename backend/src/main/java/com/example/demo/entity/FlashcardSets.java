@@ -22,15 +22,19 @@ public class FlashcardSets {
     @Column(name = "name")
     private String name;
 
+    //Many to one -> A user can have many sets of flash cards
+    //Lazy fetchType meaning initialization is deferred as long as possible.
     @ManyToOne(fetch = FetchType.LAZY,  optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "userID", nullable = false)
-    @JsonIgnore
+    @OnDelete(action = OnDeleteAction.CASCADE)    // If a user is deleted, all sets belonging to them are also deleted.
+    @JoinColumn(name = "userID", nullable = false) // creates the column on which they join on, the foreign key. can't be null
+    @JsonIgnore // ignore field when serializing
     private Users users;
 
+    // supposedly allows us to input an integer rather then a user entity when creating a card set entity
     @Column(name = "userID", updatable = false, insertable = false)
     private int userID;
 
+    //Mapping to flashcards. One set can have many flashcards
     @OneToMany(mappedBy = "setID")
     private Set<Flashcards> cards;
 

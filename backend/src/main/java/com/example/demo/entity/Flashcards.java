@@ -8,9 +8,11 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 
 
-//Employee Entity
+//Flashcard Entity
 @Entity //This will let Java know that this is an entity that we are going to map to a database table.
 @Table(name = "flashcard") //This is for the actual name of the database table we are mapping to the class.
+// When using lazy loading, we can tell Jackson to ignore helpful garbage hibernate adds to classes
+//Fixes the issues of serializing entities to/from the DB
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Flashcards {
 
@@ -19,13 +21,13 @@ public class Flashcards {
     @Column(name = "id") //This is mapping the primary key to the id column in the table.
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY,  optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "setID", nullable = false)
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY,  optional = false) // Many flashcards can belong to one set
+    @OnDelete(action = OnDeleteAction.CASCADE) // One a set is deleted, cards of the set are also deleted
+    @JoinColumn(name = "setID", nullable = false) // foreign key, column to join on
+    @JsonIgnore// hide field from parser
     private FlashcardSets flashcardsets;
 
-    @JsonIgnore
+    @JsonIgnore // shouldn't be here, but don't want to make any changes since it's working
     @Column(name = "setID", updatable = false, insertable = false)
     private int setID;
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FlashcardDataService from '../../services/FlashcardDataService';
-import HideAnswerComponent from './HideAnswerComponent';
+import { Redirect } from "react-router-dom";
 
 class FlashcardComponent extends Component {
     constructor(props) {
@@ -8,14 +8,17 @@ class FlashcardComponent extends Component {
         this.state = {
             cards: [],
             id: this.props.location.state.id.id,
-            entity: this.props.location.state.id
+            entity: this.props.location.state.id,
+            back: false
         }
+
         console.log(this.state.entity)
         this.refreshCardRegistry = this.refreshCardRegistry.bind(this)
         this.deleteCardClicked = this.deleteCardClicked.bind(this)
         this.updateCardClicked = this.updateCardClicked.bind(this)
         this.addCardClicked = this.addCardClicked.bind(this)
         this.showAnswer = this.showAnswer.bind(this)
+        this.backToSets = this.backToSets.bind(this)
     }
 
     componentDidMount() {
@@ -98,8 +101,26 @@ class FlashcardComponent extends Component {
         )   
     }
 
+    backToSets() {
+        this.setState({back:true})
+
+        
+    }
+
     render() {
+        console.log(this.state.back)
+        if(this.state.back){
+            return <Redirect
+            to={{
+            pathname: "/FlashcardSets",
+            state: { id: this.state.entity.userID }
+          }}
+        />  
+        }
+        
+        
         return (
+
             <div className="container">
                <h1 style={{textAlign:"center"}}>Card Registry</h1><br></br>
                <div className="jumbotron"  style={{backgroundColor: "gray", color: "white"}}>
@@ -129,7 +150,9 @@ class FlashcardComponent extends Component {
                    </table>
                    <div className="row">
                        <br/>
-                       <button className="btn btn-info" onClick={this.addCardClicked}>Add Flashcard</button>
+                       <button className="btn btn-info" style={{margin: 10}} onClick={this.addCardClicked}>Add Flashcard</button>
+                       <br/>
+                       <button className="btn btn-dark" style={{margin: 10}}  onClick={this.backToSets}>Back to sets</button>
                    </div>
                </div>
            </div>
