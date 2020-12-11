@@ -18,15 +18,14 @@ class CreateNewUserComponent extends Component {
 
     onSubmit(values) {
         let user = {
-            id: this.state.id,
-            firstName: values.firstName,
-            lastName: values.lastName,
-            username: values.userName,
+            userName: values.userName,
             password: values.password
         }
 
-        UserDataService.updateUser(user)
-        .then(() => this.props.history.push('/UserRegistry'))
+
+
+        UserDataService.createUser(user)
+        .then(() => this.props.history.push('/SignIn'))
     }
 
     render() {
@@ -53,16 +52,8 @@ class CreateNewUserComponent extends Component {
                                         <Field className="form-control" type="text" name="id" disabled />
                                     </fieldset> */}
                                     <fieldset className="form-group">
-                                        <label>First Name</label>
-                                        <Field className="form-control" type="text" name="firstName" placeholder="firstname" />
-                                    </fieldset >
-                                    <fieldset className="form-group">
-                                        <label>Last Name</label>
-                                        <Field className="form-control" type="text" name="lastName" placeholder="lastname" />
-                                    </fieldset>
-                                    <fieldset className="form-group">
                                         <label>Username</label>
-                                        <Field className="form-control" type="text" name="userName" placeholder="username" />
+                                        <Field className="form-control" type="text" name="userName" placeholder="userName" />
                                     </fieldset>
                                     <fieldset className="form-group">
                                         <label>Password</label>
