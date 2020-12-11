@@ -22,8 +22,6 @@ class CreateNewUserComponent extends Component {
             password: values.password
         }
 
-
-
         UserDataService.createUser(user)
         .then(() => this.props.history.push('/SignIn'))
     }

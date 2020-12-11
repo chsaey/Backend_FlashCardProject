@@ -4,6 +4,7 @@ import com.example.demo.entity.FlashcardSets;
 import com.example.demo.entity.Flashcards;
 import com.example.demo.entity.Users;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.gson.Gson;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +55,10 @@ public class FlashcardsIMPL implements  MyDAO{
     public void save(Object theCard) {
         Session currentSession = entityManager.unwrap(Session.class);
         Flashcards temp = (Flashcards) theCard;
+        Gson gson = new Gson();
         Query<Object> myQuery = currentSession.createQuery("from FlashcardSets where id like :i");
-        myQuery.setParameter("i",temp.getSetID());
+        myQuery.setParameter("i",temp.getFlashcardSets().getId());
+        System.out.println(gson.toJson(temp) );
         temp.setFlashcardSets((FlashcardSets) myQuery.getResultList().get(0));
         currentSession.saveOrUpdate(temp);
     }
