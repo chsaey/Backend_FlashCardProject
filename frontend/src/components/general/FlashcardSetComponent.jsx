@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import FlashcardSetDataService from '../../services/FlashcardSetDataService';
+import { Redirect } from "react-router-dom";
 
 class FlashcardSetComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            flashcardSets: []
-        }
+            flashcardSets: [],
+            id:this.props.location.state.id,
+            renderCards: false,
+            setID:0
+        }    
 
         this.refreshFlashcardSetRegistry = this.refreshFlashcardRegistry.bind(this)
         this.deleteFlashcardSetClicked = this.deleteFlashcardSetClicked.bind(this)
         this.updateFlashcardSetClicked = this.updateFlashcardSetClicked.bind(this)
         this.addFlashcardSetClicked = this.addFlashcardSetClicked.bind(this)
+        this.studyFlashcardSetClicked = this.studyFlashcardSetClicked.bind(this)
     }
 
     componentDidMount() {
@@ -42,16 +47,37 @@ class FlashcardSetComponent extends Component {
     }
 
     updateFlashcardSetClicked(id) {
-        console.log("Update Flashcard Set Clicked")
-        this.props.history.push(`/flashcardSet/${id}`)
+        this.props.history.push(`/theFlashcardSet/`)
+        
     }
 
     addFlashcardSetClicked(id) {
         console.log("Add Flashcard Set Clicked")
-        this.props.history.push(`/theFlashcardSet/-1`)
+        this.props.history.push(`/theFlashcardSet/1`)
+    }
+
+    
+    studyFlashcardSetClicked(id) {
+        this.setState({
+            setID:id,
+            renderCards: true
+        })           
+
     }
 
     render() {
+        console.log(this.state.renderCards)
+        console.log(this.state.setID)
+        if(this.state.renderCards){
+                //return <Redirect to={"/FlashcardSets"} />                  
+                return <Redirect
+                to={{
+                pathname: "/cardSet",
+                state: { id: this.state.setID }
+              }}
+            />           
+
+        }
         return (
             <div className="container">
                 <h1 style={{ textAlign: "center" }}>Flashcard Set Registry</h1><br></br>
@@ -65,15 +91,16 @@ class FlashcardSetComponent extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {
-                                this.state.flashcardSets.map(
+                            {                              
+                                this.state.flashcardSets.filter(elements => elements.userID === this.state.id).map(
                                     flashcardSets =>
                                         <tr style={{ textAlign: "center" }} key={flashcardSets.id}>
                                             <td>{flashcardSets.id}</td>
                                             <td>{flashcardSets.name}</td>
                                             <td>{flashcardSets.userID}</td>
+                                            <td><button className="btn btn-success" onClick={() => this.studyFlashcardSetClicked(flashcardSets.id)}>Study</button></td>
                                             <td><button className="btn btn-warning" onClick={() => this.deleteFlashcardSetClicked(flashcardSets.id, flashcardSets.name)}>Delete</button></td>
-                                            <td><button className="btn btn-success" onClick={() => this.updateFlashcardSetClicked(flashcardSets.id)}>Update</button></td>
+                                            <td><button className="btn btn-success" onClick={() => this.updateFlashcardSetClicked(flashcardSets)}>Update</button></td>
                                         </tr>
                                 )
                             }
