@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FlashcardDataService from '../../services/FlashcardDataService';
+import HideAnswerComponent from './HideAnswerComponent';
 
 class FlashcardComponent extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class FlashcardComponent extends Component {
         this.deleteCardClicked = this.deleteCardClicked.bind(this)
         this.updateCardClicked = this.updateCardClicked.bind(this)
         this.addCardClicked = this.addCardClicked.bind(this)
+        this.showAnswer = this.showAnswer.bind(this)
     }
 
     componentDidMount() {
@@ -42,6 +44,11 @@ class FlashcardComponent extends Component {
             }
         )
     }
+
+    showAnswer(answer) {
+        alert(answer) 
+    }
+
 
     updateCardClicked(id) {
         console.log('Update Card Clicked')
@@ -78,8 +85,8 @@ class FlashcardComponent extends Component {
             flashcardSets: this.state.entity,
             setID: 0
         }
-        card.question = prompt('Edit question')
-        card.answer = prompt('Edit Answer')
+        card.question = prompt('Add question')
+        card.answer = prompt('Add Answer')
  
         FlashcardDataService.createCard(card)
         .then(
@@ -111,7 +118,7 @@ class FlashcardComponent extends Component {
                                    <tr style={{textAlign: "center"}} key={cards.id}>
                                        <td>{cards.id}</td>
                                        <td>{cards.question}</td>
-                                       <td>{cards.answer}</td>
+                                       <td><button className="btn btn-success" onClick={() => this.showAnswer(cards.answer)}>Update</button></td>
                                        <td>{cards.setID}</td>
                                        <td><button className="btn btn-warning" onClick={() => this.deleteCardClicked(cards.id, cards.question)}>Delete</button></td>
                                        <td><button className="btn btn-success" onClick={() => this.updateCardClicked(cards)}>Update</button></td>
